@@ -46,26 +46,18 @@ Rules:
 - JSON only. No markdown. No commentary.
 - Tables: extract ALL BOM-style tables you see. Keep each table separate. Preserve column order.
 - For each table row: include keys EXACTLY matching the table's columns. Use "" if a cell is blank.
+- Create a table for all the stray ID's around the file, the table must include the following columns "ID", "In a table?" and "Which table" which states which table it is in. This is a very important step, do not miss it! If there are ID's or text that isn't in a table, capture it and put it in this table. Call this table "Stray IDs and Strings".
 - keyFields: capture title-block style fields (e.g., Part Number, Description, Classification, Mass, Material, Drawn By, Email, Phone, Issue/Revision, Date) when present.
 - processSteps: capture numbered process steps in order.
 - notes: capture the NOTES section as an array (one note per item).
 - idIndex: list all identifier-like strings (part numbers/codes, emails, phone numbers). Keep IDs as strings; do not dedupe unless identical.
-
-TABLE NAMING
-- Name tables sequentially in reading order as:
-  "Table 1", "Table 2", "Table 3", etc.
-- ONLY override this default name if there is a clear, explicit label
-  printed immediately above the table (e.g. "Stage 1: Laminate", "BOND BOM").
-- If a label is used, it MUST be the exact text printed above the table.
-- If there is any ambiguity, missing label, or uncertainty, use the default
-  sequential name ("Table N").
-- Never infer or invent table names.
 `.trim();
 
   try {
     // PDF file inputs are supported for models that accept text+image inputs. :contentReference[oaicite:1]{index=1}
     const response = await openai.responses.create({
       model: "gpt-4o", // PDF vision-capable model per docs :contentReference[oaicite:2]{index=2}
+
       input: [
         {
           role: "user",
